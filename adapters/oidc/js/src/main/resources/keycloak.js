@@ -268,7 +268,7 @@
                                     if (!unchanged) {
                                         kc.silentCheckSsoRedirectUri ? checkSsoSilently() : doLogin(false);
                                     } else {
-                                        initPromise.setSuccess();
+                                        doLogin(true);
                                     }
                                 }).catch(function (error) {
                                     initPromise.setError(error);
