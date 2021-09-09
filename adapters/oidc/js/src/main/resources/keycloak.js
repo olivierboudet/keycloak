@@ -249,7 +249,7 @@
                             return;
                         }
 
-                        var oauth = parseCallback(event.data);
+                        var oauth = parseCallback(event.data, initOptions.checkSsoPrompt);
                         processCallback(oauth, initPromise);
 
                         document.body.removeChild(ifrm);
@@ -1078,7 +1078,7 @@
             return uuid;
         }
 
-        function parseCallback(url) {
+        function parseCallback(url, prompt) {
             var oauth = parseCallbackUrl(url);
             if (!oauth) {
                 return;
@@ -1090,7 +1090,7 @@
                 oauth.valid = true;
                 oauth.redirectUri = oauthState.redirectUri;
                 oauth.storedNonce = oauthState.nonce;
-                oauth.prompt = oauthState.prompt;
+                oauth.prompt = prompt ? prompt : oauthState.prompt;
                 oauth.pkceCodeVerifier = oauthState.pkceCodeVerifier;
             }
 
